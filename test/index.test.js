@@ -21,6 +21,13 @@ const gAccessToken = 'test-token'
 
 // /////////////////////////////////////////////
 
+/**
+ * Creates Swagger options for a request.
+ *
+ * @param {object} [options] - The options for the request.
+ * @param {object} [options.body] - The body of the request.
+ * @returns {object} The request options including tenantId, apiKey, accessToken, and body.
+ */
 const createSwaggerOptions = ({ body } = {}) => {
   return createRequestOptions({
     tenantId: gTenantId,
@@ -30,6 +37,11 @@ const createSwaggerOptions = ({ body } = {}) => {
   })
 }
 
+/**
+ * Initializes the SDK client with the provided tenant ID, API key, and access token.
+ *
+ * @returns {Promise<object>} A promise that resolves to the initialized SDK client.
+ */
 const createSdkClient = async () => {
   return sdk.init(gTenantId, gApiKey, gAccessToken)
 }
@@ -66,6 +78,19 @@ test('sdk init test - no accessToken', async () => {
   )
 })
 
+/**
+ * Runs a standard test for an SDK function, verifying both success and failure cases.
+ * @param {object} options - The options for the test.
+ * @param {string} options.fullyQualifiedApiName - The fully qualified name of the API function.
+ * @param {object} options.apiParameters - The parameters to pass to the API function.
+ * @param {object} options.apiOptions - The options to pass to the API function.
+ * @param {string} [options.sdkFunctionName] - The name of the SDK function to test. Defaults to the API function name without the namespace.
+ * @param {Array} options.sdkArgs - The arguments to pass to the SDK function.
+ * @param {object} [options.successReturnValue={}] - The value to return when the API call is successful.
+ * @param {Function} options.ErrorClass - The error class to use when the API call fails.
+ * @throws {Error} If `ErrorClass` is not defined.
+ * @returns {Promise<void>} A promise that resolves when the test is complete.
+ */
 async function standardTest ({
   fullyQualifiedApiName, apiParameters, apiOptions,
   sdkFunctionName, sdkArgs,
@@ -117,6 +142,13 @@ test('getAllProfiles', async () => {
 })
 
 test('getAllProfiles - with filters', async () => {
+  /**
+   * Creates an array of SDK arguments with specified options.
+   *
+   * @param {object} options - The options for creating SDK arguments.
+   * @param {boolean} options.descendingSort - Indicates if the sorting should be in descending order.
+   * @returns {Array<object>} An array containing a single object with SDK arguments.
+   */
   function createSdkArgs ({ descendingSort }) {
     return [
       {
@@ -129,6 +161,13 @@ test('getAllProfiles - with filters', async () => {
     ]
   }
 
+  /**
+   * Creates API parameters for a request.
+   *
+   * @param {object} options - The options for creating API parameters.
+   * @param {boolean} options.descendingSort - Determines the sort order of the email field.
+   * @returns {object} The API parameters.
+   */
   function createApiParameters ({ descendingSort }) {
     return {
       FILTERS: 'byEmail/byText/myCustomFilter',

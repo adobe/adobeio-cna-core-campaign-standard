@@ -1,7 +1,26 @@
 {
-  "plugins": ["jest"],
-  "extends": ["standard", "plugin:jest/recommended"],
-    "parserOptions": {
+  "plugins": [
+    "jest"
+  ],
+  "extends": [
+    "@adobe/eslint-config-aio-lib-config"
+  ],
+  "settings": {
+    "jsdoc": {
+      "ignorePrivate": true
+    }
+  },
+  "parserOptions": {
     "ecmaVersion": 2018
-  }  
+  },
+  "rules": {
+    "jsdoc/no-defaults": 0,
+    "jsdoc/tag-lines": [
+      "error",
+      "never",
+      {
+        "startLines": null
+      }
+    ]
+  }
 }
