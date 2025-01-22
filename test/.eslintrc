@@ -4,5 +4,8 @@
     "fixtureJson": true,
     "fakeFileSystem": true,
     "fetchMock": true
+  },
+  "rules": {
+    "node/no-unpublished-require": 0
   }
 }

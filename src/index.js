@@ -27,7 +27,7 @@ const { createFetch } = require('@adobe/aio-lib-core-networking')
  * @param {string} tenantId the tenant id (your personal organization in Campaign Standard)
  * @param {string} apiKey the API key for your Adobe I/O Campaign Standard Integration
  * @param {string} accessToken the access token for your Adobe I/O Campaign Standard Integration
- * @return {Promise<CampaignStandardCoreAPI>}
+ * @returns {Promise<CampaignStandardCoreAPI>} returns the initialized CampaignStandardCoreAPI object
  */
 function init (tenantId, apiKey, accessToken) {
   return new Promise((resolve, reject) => {
@@ -46,10 +46,10 @@ function init (tenantId, apiKey, accessToken) {
 }
 
 /**
-* This class provides methods to call Adobe Campaign Standard APIs.
-* Before calling any method initialize the instance by calling the `init` method on it
-* with valid values for tenantId, apiKey and accessToken
-*/
+ * This class provides methods to call Adobe Campaign Standard APIs.
+ * Before calling any method initialize the instance by calling the `init` method on it
+ * with valid values for tenantId, apiKey and accessToken
+ */
 class CampaignStandardCoreAPI {
   /**
    * Initializes this object.
@@ -57,7 +57,7 @@ class CampaignStandardCoreAPI {
    * @param {string} tenantId the tenant id (your personal organization in Campaign Standard)
    * @param {string} apiKey the API key for your Adobe I/O Campaign Standard Integration
    * @param {string} accessToken the access token for your Adobe I/O Campaign Standard Integration
-   * @returns {CampaignStandardCoreAPI}
+   * @returns {CampaignStandardCoreAPI} returns the initialized CampaignStandardCoreAPI object
    */
   async init (tenantId, apiKey, accessToken) {
     // init swagger client
@@ -151,13 +151,12 @@ class CampaignStandardCoreAPI {
   /**
    * Get all Profile records
    *
-   * @param {Object} [parameters={}] parameters to pass
+   * @param {object} [parameters={}] parameters to pass
    * @param {Array} [parameters.filters=[]] apply the filters to the results. List of filters for a resource can be retrieved via a getMetadataForResource call
-   * @param {Boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
-   * @param {integer} [parameters.lineCount=25] limit the number of records to return (default is 25)
+   * @param {boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
+   * @param {number} [parameters.lineCount=25] limit the number of records to return (default is 25)
    * @param {string} [parameters.order] the field to order your records by (see the fields of a {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|Profile})
    * @param {boolean} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
-   *
    * @see getMetadataForResource
    */
   getAllProfiles (parameters) {
@@ -177,7 +176,7 @@ class CampaignStandardCoreAPI {
   /**
    * Create a Profile record
    *
-   * @param {Object} profileObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|profile properties}
+   * @param {object} profileObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|profile properties}
    */
   createProfile (profileObject) {
     const sdkDetails = { profileObject }
@@ -197,7 +196,7 @@ class CampaignStandardCoreAPI {
    * Update a Profile record
    *
    * @param {string} profilePKey the PKey property of a Profile record
-   * @param {Object} profileObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|profile properties}. Only set the properties you want to update.
+   * @param {object} profileObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|profile properties}. Only set the properties you want to update.
    */
   updateProfile (profilePKey, profileObject) {
     const sdkDetails = { profileObject, profilePKey }
@@ -235,13 +234,12 @@ class CampaignStandardCoreAPI {
   /**
    * Get all Service records
    *
-   * @param {Object} [parameters={}] parameters to pass
+   * @param {object} [parameters={}] parameters to pass
    * @param {Array} [parameters.filters=[]] apply the filters to the results. List of filters for a resource can be retrieved via a getMetadataForResource call
-   * @param {Boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
-   * @param {integer} [parameters.lineCount=25] limit the number of records to return (default is 25)
+   * @param {boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
+   * @param {number} [parameters.lineCount=25] limit the number of records to return (default is 25)
    * @param {string} [parameters.order] the field to order your records by (see the fields of a {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#service|Service})
-   * @param {descendingSort} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
-   *
+   * @param {boolean} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
    * @see getMetadataForResource
    */
   getAllServices (parameters) {
@@ -261,7 +259,7 @@ class CampaignStandardCoreAPI {
   /**
    * Create a Service record
    *
-   * @param {Object} serviceObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#service|service properties}
+   * @param {object} serviceObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#service|service properties}
    */
   createService (serviceObject) {
     const sdkDetails = { serviceObject }
@@ -376,7 +374,7 @@ class CampaignStandardCoreAPI {
   /**
    * Create a new GDPR request.
    *
-   * @param {Object} gdprRequest see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#create-a-new-gdpr-request|the properties} that are needed.
+   * @param {object} gdprRequest see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#create-a-new-gdpr-request|the properties} that are needed.
    */
   createGDPRRequest (gdprRequest) {
     const sdkDetails = { gdprRequest }
@@ -412,7 +410,6 @@ class CampaignStandardCoreAPI {
    *
    * @param {string} privacyRequestDataUrl this is acquired from a getGDPRRequest call
    * @param {string} requestInternalName  the request internal name
-   *
    * @see getGDPRRequest
    */
   getGDPRDataFile (privacyRequestDataUrl, requestInternalName) {
@@ -432,7 +429,8 @@ class CampaignStandardCoreAPI {
    *
    * @deprecated
    * @param {string} eventId the type of event you want to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
-   * @param {Object} eventBody the event data to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
+   * @param {object} eventBody the event data to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
+   * @returns {Promise<object>} the response from the API
    */
   sendTransactionalEvent (eventId, eventBody) {
     return this.sendTransactionalEventForMacTenantId(this.tenantId, eventId, eventBody)
@@ -443,7 +441,8 @@ class CampaignStandardCoreAPI {
    *
    * @param {string} macTenantId the Marketing Cloud Tenant ID
    * @param {string} eventId the type of event you want to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
-   * @param {Object} eventBody the event data to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
+   * @param {object} eventBody the event data to send. This depends on the {@link https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-transactional-messaging.html|event definition}.
+   * @returns {Promise<object>} the response from the API
    */
   sendTransactionalEventForMacTenantId (macTenantId, eventId, eventBody) {
     const sdkDetails = { macTenantId, eventId, eventBody }
@@ -471,6 +470,7 @@ class CampaignStandardCoreAPI {
    * @param {string} eventId the type of event you want to send
    * @param {string} eventPKey the PKey of an event (you get this from a sendTransactionalEvent call)
    * @see sendTransactionalEvent
+   * @returns {Promise<object>} the response from the API
    */
   getTransactionalEvent (eventId, eventPKey) {
     return this.getTransactionalEventForMacTenantId(this.tenantId, eventId, eventPKey)
@@ -483,6 +483,7 @@ class CampaignStandardCoreAPI {
    * @param {string} eventId the type of event you want to send
    * @param {string} eventPKey the PKey of an event (you get this from a sendTransactionalEvent call)
    * @see sendTransactionalEvent
+   * @returns {Promise<object>} the response from the API
    */
   getTransactionalEventForMacTenantId (macTenantId, eventId, eventPKey) {
     const sdkDetails = { macTenantId, eventId, eventPKey }
@@ -526,9 +527,9 @@ class CampaignStandardCoreAPI {
    * Trigger a workflow.
    *
    * @param {string} workflowTriggerUrl the trigger url for a workflow. You can get this from a call to getWorkflow
-   * @param {Object} [workflowParameters] workflow parameters object. see the payload in the {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#triggering-a-signal-activity|docs}
+   * @param {object} [workflowParameters] workflow parameters object. see the payload in the {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#triggering-a-signal-activity|docs}
    * @param {string} workflowParameters.source the triggering request source
-   * @param {Object} workflowParameters.parameters the parameters to send to the workflow (paramater name, and parameter value pairs)
+   * @param {object} workflowParameters.parameters the parameters to send to the workflow (paramater name, and parameter value pairs)
    * @see getWorkflow
    */
   triggerSignalActivity (workflowTriggerUrl, workflowParameters) {
@@ -590,12 +591,12 @@ class CampaignStandardCoreAPI {
   /**
    * Get all available orgUnits
    *
-   * @param {Object} [parameters={}] parameters to pass
+   * @param {object} [parameters={}] parameters to pass
    * @param {Array} [parameters.filters=[]] apply the filters to the results. List of filters for a resource can be retrieved via a getMetadataForResource call
-   * @param {integer} [parameters.lineCount=25] limit the number of records to return (default is 25)
+   * @param {number} [parameters.lineCount=25] limit the number of records to return (default is 25)
    * @param {string} [parameters.order] the field to order your records by (see the fields of a {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#orgunitbase|OrgUnitBase})
-   * @param {descendingSort} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
-   *
+   * @param {boolean} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
+   * @returns {Promise<object>} the response from the API
    * @see getMetadataForResource
    */
   getAllOrgUnits (parameters) {
@@ -662,7 +663,7 @@ class CampaignStandardCoreAPI {
    * Update the properties of an OrgUnitBase.
    *
    * @param {string} orgUnitPKey the PKey property of a OrgUnitBase record
-   * @param {Object} orgUnitObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#orgunitbase|orgUnitBase properties}. Only set the properties you want to update.
+   * @param {object} orgUnitObject see {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#orgunitbase|orgUnitBase properties}. Only set the properties you want to update.
    */
   updateOrgUnit (orgUnitPKey, orgUnitObject) {
     const sdkDetails = { orgUnitPKey, orgUnitObject }
@@ -683,7 +684,8 @@ class CampaignStandardCoreAPI {
    * Post to an absolute url.
    *
    * @param {string} url the url to POST to
-   * @param {Object} body the POST body
+   * @param {object} body the POST body
+   * @returns {Promise<object>} the response from the API
    */
   postDataToUrl (url, body) {
     const options = this.__createRequestOptions()
@@ -726,15 +728,13 @@ class CampaignStandardCoreAPI {
    * Either use getAllBasicCustomResources() to get custom resources or
    * getAllProfileAndServicesExt() to get extended resource data
    * @deprecated
-   *
    * @param {string} customResource the custom resource to get records from
-   * @param {Object} [parameters={}] parameters to pass
+   * @param {object} [parameters={}] parameters to pass
    * @param {Array} [parameters.filters=[]] apply the filters to the results. List of filters for a resource can be retrieved via a getMetadataForResource call
-   * @param {Boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
-   * @param {integer} [parameters.lineCount=25] limit the number of records to return (default is 25)
+   * @param {boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
+   * @param {number} [parameters.lineCount=25] limit the number of records to return (default is 25)
    * @param {string} [parameters.order] the field to order your records by (see the fields of a {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|Profile})
    * @param {boolean} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
-   *
    * @see getMetadataForResource
    */
   getAllCustomResources (customResource, parameters) {
@@ -775,13 +775,12 @@ class CampaignStandardCoreAPI {
    * Get all Custom Resource records
    *
    * @param {string} customResource the custom resource to get records from
-   * @param {Object} [parameters={}] parameters to pass
+   * @param {object} [parameters={}] parameters to pass
    * @param {Array} [parameters.filters=[]] apply the filters to the results. List of filters for a resource can be retrieved via a getMetadataForResource call
-   * @param {Boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
-   * @param {integer} [parameters.lineCount=25] limit the number of records to return (default is 25)
+   * @param {boolean} [parameters.hasCustomFilter=false] set to true if you have a custom filter. Defaults to false.
+   * @param {number} [parameters.lineCount=25] limit the number of records to return (default is 25)
    * @param {string} [parameters.order] the field to order your records by (see the fields of a {@link https://docs.campaign.adobe.com/doc/standard/en/api/ACS_API.html#profile|Profile})
    * @param {boolean} [parameters.descendingSort=false] set to true to get results in descending order (default is ascending)
-   *
    * @see getMetadataForResource
    */
   getAllProfileAndServicesExt (customResource, parameters) {
@@ -804,7 +803,7 @@ class CampaignStandardCoreAPI {
    *
    * @param {string} customResource the custom resource
    * @param {string} customResourcePKey the PKey property of a Custom Resource record
-   * @param {Object} customResourceObject A Custom Resource object. Only set the properties you want to update.
+   * @param {object} customResourceObject A Custom Resource object. Only set the properties you want to update.
    */
   updateCustomResource (customResource, customResourcePKey, customResourceObject) {
     const sdkDetails = { customResource, customResourceObject, customResourcePKey }
@@ -824,7 +823,7 @@ class CampaignStandardCoreAPI {
    * Create a Custom Resource record
    *
    * @param {string} customResource the custom resource
-   * @param {Object} customResourceObject a Custom Resource object
+   * @param {object} customResourceObject a Custom Resource object
    */
   createCustomResource (customResource, customResourceObject) {
     const sdkDetails = { customResource, customResourceObject }
@@ -845,7 +844,6 @@ class CampaignStandardCoreAPI {
    *
    * @param {string} customResource the custom resource
    * @param {string} customResourcePKey the PKey property of a Custom Resource record
-   * @param {Object} customResourceObject a Custom Resource object
    */
   deleteCustomResource (customResource, customResourcePKey) {
     const sdkDetails = { customResource, customResourcePKey }
